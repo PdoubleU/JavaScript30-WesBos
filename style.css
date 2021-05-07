@@ -1,36 +1,36 @@
 body {
-    background-color: aqua;
+    background: rgb(2,0,36);
+    background: linear-gradient(216deg, rgba(2,0,36,1) 0%, rgba(0,0,255,1) 35%, rgba(0,212,255,1) 100%);
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
     margin: 0;
     padding: 0;
 }
-.keyboard {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
+.clock-face {
+    position: relative;
+    width: 14rem;
+    height: 14rem;
 }
-.key {
+.clock {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    width: 3rem;
-    margin: 1rem;
-    padding: .5rem .3rem;
-    border: 2px solid black ;
-    border-radius: 5px;
-    transition: all 100ms;
+    height: 15rem;
+    width: 15rem;
+    border-radius: 50%;
+    border: 5px solid white;
 }
-.playing {
-    transform: scale(.95);
-    border-color: chartreuse;
-    box-shadow: 0 0 10px chartreuse;
-}
-kbd {
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-span {
-    font-size: .8rem;
+.hand {
+    width: 50%;
+    height: 6px;
+    position: absolute;
+    border-radius: 50px;
+    background-color: azure;
+    top: calc(50% - 3px);
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition: all .5s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }

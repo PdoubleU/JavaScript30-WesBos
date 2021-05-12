@@ -6,14 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
-    <title>Clock</title>
+    <title>CSS variables</title>
 </head>
 <body>
-<div class="clock">
-    <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+<h1>CSS variables can be changed in the <span class="title-element">JS</span></h1>
+<div class="container">
+    <div class="control-panel">
+        <form>
+            <label for="color">Color: </label>
+            <input class="control-input" name="color" type="color" value="#BADA55">
+            <label for="border">Border: </label>
+            <input class="control-input" name="border" type="range" value="100" data-units="px">
+            <label for="blur">Blur: </label>
+            <input class="control-input" name="blur" type="range" value="100" min='1' max='25' data-units="px">
+        </form>
+    </div>
+    <div class="picture">
+        <img src="./assets/karkonosze.JPG" alt="karkonosze, śnieżne kotły" height="300px">
     </div>
 </div>
 </body>

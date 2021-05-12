@@ -1,23 +1,10 @@
-const secondHand = document.querySelector('.second-hand');
-const minuteHand = document.querySelector('.min-hand');
-const hourHand = document.querySelector('.hour-hand');
+const inputs = document.querySelectorAll('.control-input');
 
-
-function setDate() {
-    const currentTime = new Date();
-
-    const seconds = currentTime.getSeconds();
-    const secondsDegrees = ((seconds / 60) * 360) + 90;
-    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-
-    const mins = currentTime.getMinutes();
-    const minsDegrees = ((mins / 60) * 360) + 90;
-    minuteHand.style.transform = `rotate(${minsDegrees}deg)`;
-
-    const hrs = currentTime.getHours();
-
-    const hrsDegrees = ((hrs / 12) * 360) + 90;
-    hourHand.style.transform = `rotate(${hrsDegrees}deg)`;
+function handleUpdate() {
+    const rootElement = document.documentElement;
+    const units = this.dataset.units || '';
+    rootElement.style.setProperty(`--${this.name}`, this.value + units)
 }
 
-setInterval(setDate, 1000);
+inputs.forEach(elem => elem.addEventListener('change', handleUpdate))
+inputs.forEach(elem => elem.addEventListener('mousemove', handleUpdate))

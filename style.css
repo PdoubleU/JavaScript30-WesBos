@@ -1,42 +1,66 @@
 :root {
-    --border: 20px;
-    --blur: 10px;
-    --color: #BADA55;
+    box-sizing: border-box;
 }
-
 body {
-    background: rgb(2,0,36);
-    background: linear-gradient(216deg, rgba(2,0,36,1) 0%, rgba(0,0,255,1) 35%, rgba(0,212,255,1) 100%);
-    color: beige;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 100vh;
     margin: 0;
     padding: 0;
+    height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: wheat;
+    font-size: 28px;
+    font-weight: bold;
 }
-.container {
-    height: 60%;
+.panels {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
-.control-panel > form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.panel {
+    padding: 1rem;
+    position: relative;
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    transition: all cubic-bezier(.51,.37,0,1.27) 1s .2s;
 }
-.picture {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.panel:hover {
+    flex: 5;
+    font-size: 30px;
 }
-img {
-    border: var(--border) var(--color) solid ;
-    filter: blur(var(--blur));
+.panel:hover > div > p.bottom,
+.panel:hover > div > p.top {
+    opacity: 1;
+    margin-top: 0;
 }
-.title-element {
-    color: var(--color);
+.panel > div {
+    position: absolute;
+    height: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+p.bottom,
+p.top {
+    opacity: 0;
+    margin-top: -4rem;
+    transition: all ease-out 1s .5s;
+}
+
+.panel1 {
+    background-image: url(./assets/01.jpg);
+}
+.panel2 {
+    background-image: url(./assets/02.jpg);
+}
+.panel3 {
+    background-image: url(./assets/03.jpg);
+}
+.panel4 {
+    background-image: url(./assets/04.jpg);
+}
+.panel5 {
+    background-image: url(./assets/05.jpg);
 }

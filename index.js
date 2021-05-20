@@ -1,44 +1,41 @@
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const canvas = document.querySelector('#draw');
+const ctx = canvas.getContext('2d');
 
-const input = document.querySelector('#city');
-const suggestions = document.querySelector('.suggestions');
-const cities = [];
+let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+let hue = 0;
+let direction = true;
 
-fetch(endpoint)
-    .then(blob => blob.json())
-    .then(data => cities.push(...data));
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.lineWidth = 1;
 
-const findMatches = (wordToMatch, cities) => {
-    return cities.filter(element => {
-        let regexp = new RegExp(wordToMatch, 'gi');
-        return element.city.match(regexp) || element.state.match(regexp);
-    });
+function draw(e) {
+    if (!isDrawing) return;
+
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    [lastX, lastY] = [e.offsetX, e.offsetY]
+    hue++;
+    if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+        direction = !direction;
+    }
+    (direction) ? ctx.lineWidth++ : ctx.lineWidth--;
 }
 
-function displayMatch() {
-    let match = findMatches(this.value, cities);
-    let regexp = new RegExp(this.value, 'gi');
-    while (suggestions.firstChild) {
-        suggestions.removeChild(suggestions.lastChild);
-      }
-    let html = match.map(element => {
-        let cityName = element.city.replace(regexp, `<span class='hl'>${this.value}</span>`)
-        let stateName = element.state.replace(regexp, `<span class='hl'>${this.value}</span>`)
-        return `
-        <li class="city_name">
-            <span>${cityName} (${stateName})</span>
-        </li>
-        `
-    });
-    suggestions.innerHTML = html.join('');
-}
-
-function pickFromList(e) {
-    let pickedItem = e.target.innerText;
-    input.value = pickedItem;
-}
-
-input.addEventListener('keyup', displayMatch);
-input.addEventListener('change', displayMatch);
-
-suggestions.addEventListener('click', e => pickFromList(e));
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+    ctx.lineWidth = 1;
+});
+canvas.addEventListener('mouseout', () => isDrawing = false);

@@ -1,41 +1,25 @@
-const canvas = document.querySelector('#draw');
-const ctx = canvas.getContext('2d');
+const checkboxes = document.querySelectorAll('.container input[type="checkbox"]')
 
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-let hue = 0;
-let direction = true;
+let lastChecked;
 
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
-ctx.lineWidth = 1;
+function handleCheck(e) {
+    let inBetween = false;
 
-function draw(e) {
-    if (!isDrawing) return;
+    if (e.shiftKey && this.checked) {
+        checkboxes.forEach(item => {
+            if(item === this || item === lastChecked) {
+                inBetween = !inBetween;
+            }
 
-    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
-    [lastX, lastY] = [e.offsetX, e.offsetY]
-    hue++;
-    if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
-        direction = !direction;
+            if(inBetween) {
+                item.checked = true;
+            }
+        })
     }
-    (direction) ? ctx.lineWidth++ : ctx.lineWidth--;
+
+    lastChecked = this;
 }
 
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mousedown', (e) => {
-    isDrawing = true;
-    [lastX, lastY] = [e.offsetX, e.offsetY];
-});
-canvas.addEventListener('mouseup', () => {
-    isDrawing = false;
-    ctx.lineWidth = 1;
-});
-canvas.addEventListener('mouseout', () => isDrawing = false);
+checkboxes.forEach(item => item.addEventListener(
+    'click', handleCheck
+))

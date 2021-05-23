@@ -1,25 +1,13 @@
-const checkboxes = document.querySelectorAll('.container input[type="checkbox"]')
+const player = document.querySelector('.player');
+const video = document.querySelector('.viewer');
+const progress = document.querySelector('.progress');
+const progressBar = document.querySelector('.progress__filled');
+const toggle = player.querySelector('.toggle');
+const skipButtons = player.querySelectorAll('[data-skip]');
+const ranges = player.querySelectorAll('.player__slider');
 
-let lastChecked;
-
-function handleCheck(e) {
-    let inBetween = false;
-
-    if (e.shiftKey && this.checked) {
-        checkboxes.forEach(item => {
-            if(item === this || item === lastChecked) {
-                inBetween = !inBetween;
-            }
-
-            if(inBetween) {
-                item.checked = true;
-            }
-        })
-    }
-
-    lastChecked = this;
+function togglePlay() {
+    (video.paused) ? video.play() : video.pause();
 }
 
-checkboxes.forEach(item => item.addEventListener(
-    'click', handleCheck
-))
+toggle.addEventListener('click', togglePlay)

@@ -1,13 +1,14 @@
-const player = document.querySelector('.player');
-const video = document.querySelector('.viewer');
-const progress = document.querySelector('.progress');
-const progressBar = document.querySelector('.progress__filled');
-const toggle = player.querySelector('.toggle');
-const skipButtons = player.querySelectorAll('[data-skip]');
-const ranges = player.querySelectorAll('.player__slider');
+let elem = document.querySelector('.secretCode');
+const keySequence = [];
+const secretCode = 'piter';
 
-function togglePlay() {
-    (video.paused) ? video.play() : video.pause();
+function getKeySequence(e) {
+    keySequence.push(e.key);
+    keySequence.splice(-secretCode.length - 1, keySequence.length - secretCode.length)
+    elem.innerHTML = keySequence.join('')
+    if (keySequence.join('') === secretCode) {
+        alert('good!');
+    }
 }
 
-toggle.addEventListener('click', togglePlay)
+window.addEventListener('keypress', getKeySequence);

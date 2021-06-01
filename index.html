@@ -10,13 +10,25 @@
 </head>
 <body>
     <div class="container">
-        <h2>Shopping list</h2>
-        <ul class="listsItem"></ul>
-        <form class="addItem">
-            <label for="addItem"></label>
-            <input type="text" name="addItem" id="addItem" placeholder="add ingriedient">
-            <button type="submit">Add</button>
-        </form>
+        <div class="panel">
+            <label for="rmin">Red min</label>
+            <input type="range" name="rmin" id="" min=0 max=255>
+            <label for="rmax">Red max</label>
+            <input type="range" name="rmax" id="" min=0 max=255>
+            <br>
+            <label for="gmin">Green min</label>
+            <input type="range" name="gmin" id="" min=0 max=255>
+            <label for="gmax">Green max</label>
+            <input type="range" name="gmax" id="" min=0 max=255>
+            <br>
+            <label for="bmin">Blue min</label>
+            <input type="range" name="bmin" id="" min=0 max=255>
+            <label for="bmax">Blue max</label>
+            <input type="range" name="bmax" id="" min=0 max=255>
+        </div>
+        <canvas class="photo"></canvas>
+        <video src="" class="player"></video>
+        <div class="strip"></div>
     </div>
 </body>
 </html>

@@ -1,5 +1,10 @@
-const video = document.querySelector('.player');
-const canvas = document.querySelector('.photo');
-const ctx = canvas.getContext('2d');
-const strip = document.querySelector('.strip');
-const snap = document.querySelector('.snap');
+const arrow = document.querySelector('.arrow');
+const speed = document.querySelector('.speed-value');
+
+navigator.geolocation.watchPosition((data) => {
+  console.log(data);
+  speed.textContent = data.coords.speed;
+  arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+}, (err) => {
+  console.error(err);
+});

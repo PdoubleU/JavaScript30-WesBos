@@ -1,0 +1,26 @@
+{
+  "name": "javascript30",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "browser-sync": "^2.26.14",
+    "three": "^0.129.0"
+  },
+  "devDependencies": {
+    "es-module-loader": "^2.3.0"
+  },
+  "scripts": {
+    "start": "browser-sync start --server --files '*.css, *.html, *.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PdoubleU/JavaScript30-WesBos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PdoubleU/JavaScript30-WesBos/issues"
+  },
+  "homepage": "https://github.com/PdoubleU/JavaScript30-WesBos#readme"
+}
